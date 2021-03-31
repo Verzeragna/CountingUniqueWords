@@ -28,7 +28,7 @@ public class DoComands implements IDoComands {
 
     @Override
     public void search(){
-        ConsoleHelper.showMessage("Введите URL страницы:");
+        ConsoleHelper.showMessage("Введите URL страницы, пример (https://www.simbirsoft.com):");
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         String line = null;
         try {
@@ -104,6 +104,11 @@ public class DoComands implements IDoComands {
         }else{
             ConsoleHelper.showMessage("Для поиска необходимо ввести хотябы один символ!");
         }
+    }
+
+    @Override
+    public void help() {
+        showAvaliableComands();
     }
 
     @Override

@@ -7,5 +7,6 @@ public interface IDoComands {
     void clearDataBase();
     void delete();
     void getData();
+    void help();
     void showAvaliableComands();
 }

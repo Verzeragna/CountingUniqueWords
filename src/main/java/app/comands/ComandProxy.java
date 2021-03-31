@@ -23,6 +23,9 @@ public class ComandProxy {
             case "delete":
                 comands.delete();
                 break;
+            case "help":
+                comands.help();
+                break;
             default:
                 ConsoleHelper.showMessage("Команда не распознана!");
         }
