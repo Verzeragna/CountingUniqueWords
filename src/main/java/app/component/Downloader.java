@@ -26,7 +26,7 @@ public class Downloader {
 
         String pattern = "(?u)[^\\pL ]";
         StringBuilder stringBuilder = new StringBuilder();
-
+        
         URL oracle = new URL(url);
         BufferedReader in = new BufferedReader(
                 new InputStreamReader(oracle.openStream()));

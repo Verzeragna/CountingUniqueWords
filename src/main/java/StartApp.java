@@ -38,9 +38,9 @@ public class StartApp {
             }catch (IOException ex){
                 log.error("Ошибка чтения с консоли: " + ex);
             }
-            if (!line.equals("exit")) {
+            //if (!line.equals("exit")) {
                 comandProxy.doComand(line, comands);
-            }
+            //}
         }
 
         ctx.close();

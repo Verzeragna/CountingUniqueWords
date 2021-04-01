@@ -8,5 +8,6 @@ public interface IDoComands {
     void delete();
     void getData();
     void help();
+    void exit();
     void showAvaliableComands();
 }

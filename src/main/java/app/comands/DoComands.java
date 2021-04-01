@@ -57,6 +57,9 @@ public class DoComands implements IDoComands {
         for (Statistic el : dataList) {
             ConsoleHelper.showMessage(el.toString());
         }
+        if (dataList.size()==0){
+            ConsoleHelper.showMessage("Записи в базе данных отсутствуют!");
+        }
         ConsoleHelper.showMessage("Конец.................................................");
     }
 
@@ -100,6 +103,9 @@ public class DoComands implements IDoComands {
             for (Statistic el : statisticList) {
                 ConsoleHelper.showMessage(el.toString());
             }
+            if (statisticList.size()==0){
+                ConsoleHelper.showMessage("Записи в базе данных отсутствуют!");
+            }
             ConsoleHelper.showMessage("Конец.................................................");
         }else{
             ConsoleHelper.showMessage("Для поиска необходимо ввести хотябы один символ!");
@@ -109,6 +115,11 @@ public class DoComands implements IDoComands {
     @Override
     public void help() {
         showAvaliableComands();
+    }
+
+    @Override
+    public void exit() {
+        workWithDataBase.disconnect();
     }
 
     @Override

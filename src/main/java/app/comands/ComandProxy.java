@@ -26,6 +26,9 @@ public class ComandProxy {
             case "help":
                 comands.help();
                 break;
+            case "exit":
+                comands.exit();
+                break;
             default:
                 ConsoleHelper.showMessage("Команда не распознана!");
         }
