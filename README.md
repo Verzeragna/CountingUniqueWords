@@ -8,7 +8,7 @@
 2. Для сохранения статистики используется база данных MySQL. Скачать последнюю версию для вашей системы можно тут https://www.mysql.com/.  
   Затем необходимо создать пользователя user с паролем user, используя следующий SQL код:  
   CREATE USER 'user'@'localhost' IDENTIFIED BY 'user';  
-  GRANT ALL PRIVILEGES ON * . * TO 'user'@'localhost';
+  GRANT ALL PRIVILEGES ON * . * TO 'user'@'localhost';  
   После этого создайте соединение и укажите созданного пользователя.
   Далее необходимо создать базу данных и таюлицу (используйте следующий SQL код):  
   CREATE DATABASE  simbirsoft_db;  
