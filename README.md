@@ -10,7 +10,7 @@
   CREATE USER 'user'@'localhost' IDENTIFIED BY 'user';  
   GRANT ALL PRIVILEGES ON * . * TO 'user'@'localhost';  
   После этого создайте соединение и укажите созданного пользователя.
-  Далее необходимо создать базу данных и таюлицу (используйте следующий SQL код):  
+  Далее необходимо создать базу данных и таблицу (используйте следующий SQL код):  
   CREATE DATABASE  simbirsoft_db;  
   USE simbirsoft_db;  
 
