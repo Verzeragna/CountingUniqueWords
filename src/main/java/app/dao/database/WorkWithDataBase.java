@@ -13,14 +13,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class WorkWithDataBase implements IWorkWithDataBase {
+public class WorkWithDataBase {
 
     private SessionFactory factory;
     private Session session;
 
     private static final Logger log = LogManager.getLogger(WorkWithDataBase.class);
 
-    @Override
     public void save(Statistic statistics) {
         try {
             session = factory.getCurrentSession();
@@ -35,7 +34,6 @@ public class WorkWithDataBase implements IWorkWithDataBase {
 
     }
 
-    @Override
     public void delete(String searchLine)  {
 
         String temp = "%"+searchLine+"%";
@@ -52,7 +50,6 @@ public class WorkWithDataBase implements IWorkWithDataBase {
         }
     }
 
-    @Override
     public void clear() {
         try {
             session = factory.getCurrentSession();
@@ -67,12 +64,10 @@ public class WorkWithDataBase implements IWorkWithDataBase {
         }
     }
 
-    @Override
     public void disconnect() {
         factory.close();
     }
 
-    @Override
     public List<Statistic> getAllData() {
 
         List<Statistic> dataList = new ArrayList<>();
@@ -89,7 +84,6 @@ public class WorkWithDataBase implements IWorkWithDataBase {
         return dataList;
     }
 
-    @Override
     public List<Statistic> getData(String searchLine) {
 
         String temp = "%"+searchLine+"%";

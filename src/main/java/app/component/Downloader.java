@@ -1,10 +1,11 @@
 package app.component;
 
-import app.dao.database.IWorkWithDataBase;
+import app.dao.database.WorkWithDataBase;
 import app.dao.model.Statistic;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jsoup.Jsoup;
+import org.jsoup.select.Collector;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -13,12 +14,13 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Component
 public class Downloader {
 
     @Autowired
-    IWorkWithDataBase workWithDataBase;
+    WorkWithDataBase workWithDataBase;
 
     private static final Logger log = LogManager.getLogger(Downloader.class);
 
@@ -41,23 +43,20 @@ public class Downloader {
         content = content.replaceAll("[0-9]+", "");
         String[] text = content.replaceAll(pattern, " ").toLowerCase().split("\\s+");
         List<String> list = new ArrayList<>(Arrays.asList(text));
-        Map<String, Integer> wordMap = countWords(list);
+        Map<String, Long> wordMap = countWords(list);
         log.info("На странице найдено " + wordMap.size() + " различных слов.");
-        for (Map.Entry<String, Integer> entry : wordMap.entrySet()) {
+        for (Map.Entry<String, Long> entry : wordMap.entrySet()) {
             Statistic stat = new Statistic(url, entry.getKey(), entry.getValue());
             workWithDataBase.save(stat);
         }
     }
 
-    private Map<String, Integer> countWords(List<String> list) {
+    private Map<String, Long> countWords(List<String> list) {
 
-        Map<String, Integer> result = new HashMap<>();
+        Map<String, Long> result = new HashMap<>();
         for (int i = 0; i < list.size(); i++) {
             String element = list.get(i);
-            int count = 0;
-            for (String el : list) {
-                if (element.equals(el)) count++;
-            }
+            long count = list.stream().filter(l->l.equals(element)).count();
             result.put(element, count);
         }
         return result;
@@ -66,7 +65,7 @@ public class Downloader {
     public Downloader() {
     }
 
-    public void setWorkWithDataBase(IWorkWithDataBase workWithDataBase) {
+    public void setWorkWithDataBase(WorkWithDataBase workWithDataBase) {
         this.workWithDataBase = workWithDataBase;
     }
 }

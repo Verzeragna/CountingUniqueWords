@@ -1,5 +1,4 @@
 import app.component.Downloader;
-import app.dao.database.IWorkWithDataBase;
 import app.dao.database.WorkWithDataBase;
 import app.dao.model.Statistic;
 import org.junit.Assert;
@@ -13,7 +12,7 @@ import java.util.List;
 public class TestApp {
 
     private Downloader downloader;
-    private IWorkWithDataBase workWithDataBase;
+    private WorkWithDataBase workWithDataBase;
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
@@ -28,11 +27,11 @@ public class TestApp {
     @Test
     public void testDownloadAndSave(){
         try {
-            downloader.downloadPage("https://www.simbirsoft.com/");
+            downloader.downloadPage("https://coinmarketcap.com/airdrop/upcoming/");
         }catch (Exception e){
             System.out.println(e);
         }
-        List<Statistic> statisticList = workWithDataBase.getData("simbirsoft");
+        List<Statistic> statisticList = workWithDataBase.getData("coinmarketcap");
         Assert.assertNotEquals(0,statisticList.size());
     }
 

@@ -1,63 +1,42 @@
 package app.dao.model;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "statistics")
 public class Statistic {
 
+    @Getter
+    @Setter
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
 
+    @Getter
+    @Setter
     @Column(name = "url")
     private String url;
 
+    @Getter
+    @Setter
     @Column(name = "word")
     private String word;
 
+    @Getter
+    @Setter
     @Column(name = "count_word")
-    private int countWord;
+    private long countWord;
 
     public Statistic() {
     }
 
-    public Statistic(String uri, String word, int countWord) {
+    public Statistic(String uri, String word, long countWord) {
         this.url = uri;
         this.word = word;
-        this.countWord = countWord;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
-    public String getWord() {
-        return word;
-    }
-
-    public void setWord(String word) {
-        this.word = word;
-    }
-
-    public int getCountWord() {
-        return countWord;
-    }
-
-    public void setCountWord(int countWord) {
         this.countWord = countWord;
     }
 

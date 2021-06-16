@@ -1,6 +1,8 @@
-import app.comands.ComandProxy;
-import app.comands.DoComands;
-import app.comands.IDoComands;
+package app;
+
+import app.comands.Command;
+import app.comands.CommandInfo;
+import app.comands.CommandProxy;
 import app.config.AppConfig;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -14,37 +16,24 @@ public class StartApp {
 
     private static final Logger log = LogManager.getLogger(StartApp.class);
 
-    public static void main(String[] args){
-
-        StartApp app = new StartApp();
-        app.run();
-
-    }
-
-    private void run(){
+    public void run(){
 
         AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(AppConfig.class);
-        IDoComands comands = ctx.getBean("doComands", DoComands.class);
-        ComandProxy comandProxy = ctx.getBean("comandProxy", ComandProxy.class);
-
+        CommandProxy commandProxy = ctx.getBean("commandProxy", CommandProxy.class);
+        Command commandInfo = ctx.getBean("commandInfo", CommandInfo.class);
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         String line = "";
-
-        comands.showAvaliableComands();
+        commandInfo.doSomeCommand();
 
         while (!line.equals("exit")) {
             try {
                 line = reader.readLine();
+                commandProxy.doCommand(line);
             }catch (IOException ex){
                 log.error("Ошибка чтения с консоли: " + ex);
             }
-            //if (!line.equals("exit")) {
-                comandProxy.doComand(line, comands);
-            //}
         }
-
         ctx.close();
 
     }
 }
-
