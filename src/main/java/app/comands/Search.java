@@ -13,16 +13,17 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 @Component
-public class Search implements Command{
+public class Search implements Command {
 
     private static final Logger log = LogManager.getLogger(Search.class);
+
     @Override
     public void doSomeCommand() {
         ConsoleHelper.showMessage("Введите URL страницы, пример (https://www.simbirsoft.com):");
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         String line = null;
         AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(AppConfig.class);
-        Downloader downloader = ctx.getBean("downloader",Downloader.class);
+        Downloader downloader = ctx.getBean("downloader", Downloader.class);
         try {
             line = reader.readLine();
         } catch (IOException e) {

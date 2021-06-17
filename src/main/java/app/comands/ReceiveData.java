@@ -12,15 +12,17 @@ import org.springframework.stereotype.Component;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Collections;
 import java.util.List;
 
 @Component
-public class ReceiveData implements Command{
+public class ReceiveData implements Command {
     private static final Logger log = LogManager.getLogger(ReceiveData.class);
+
     @Override
     public void doSomeCommand() {
         AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(AppConfig.class);
-        WorkWithDataBase workWithDataBase = ctx.getBean("workWithDataBase",WorkWithDataBase.class);
+        WorkWithDataBase workWithDataBase = ctx.getBean("workWithDataBase", WorkWithDataBase.class);
         ConsoleHelper.showMessage("Введите URL (либо часть URL) для поиска:");
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         String line = null;
@@ -29,17 +31,16 @@ public class ReceiveData implements Command{
         } catch (IOException e) {
             log.error("Ошибка чтения с консоли: " + e);
         }
-        if (line.length()>0) {
+        if (line.length() > 0) {
             log.info("Поиск по строке " + line);
             List<Statistic> statisticList = workWithDataBase.getData(line);
-            for (Statistic el : statisticList) {
-                ConsoleHelper.showMessage(el.toString());
-            }
-            if (statisticList.size()==0){
+            Collections.sort(statisticList);
+            statisticList.forEach(el -> ConsoleHelper.showMessage(el.toString()));
+            if (statisticList.size() == 0) {
                 ConsoleHelper.showMessage("Записи в базе данных отсутствуют!");
             }
             ConsoleHelper.showMessage("Конец.................................................");
-        }else{
+        } else {
             ConsoleHelper.showMessage("Для поиска необходимо ввести хотябы один символ!");
         }
     }

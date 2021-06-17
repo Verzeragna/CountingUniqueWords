@@ -13,12 +13,13 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 @Component
-public class Delete implements Command{
+public class Delete implements Command {
     private static final Logger log = LogManager.getLogger(Delete.class);
+
     @Override
     public void doSomeCommand() {
         AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(AppConfig.class);
-        WorkWithDataBase workWithDataBase = ctx.getBean("workWithDataBase",WorkWithDataBase.class);
+        WorkWithDataBase workWithDataBase = ctx.getBean("workWithDataBase", WorkWithDataBase.class);
         ConsoleHelper.showMessage("Введите URL (либо часть URL) для удаления:");
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         String line = null;
@@ -27,10 +28,10 @@ public class Delete implements Command{
         } catch (IOException e) {
             log.error("Ошибка чтения с консоли: " + e);
         }
-        if (line.length()>0) {
+        if (line.length() > 0) {
             log.info("Удаление из базы по строке " + line);
             workWithDataBase.delete(line);
-        }else{
+        } else {
             ConsoleHelper.showMessage("Для удаления необходимо ввести хотябы один символ!");
         }
     }

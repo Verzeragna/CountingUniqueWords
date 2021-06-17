@@ -28,7 +28,7 @@ public class Downloader {
 
         String pattern = "(?u)[^\\pL ]";
         StringBuilder stringBuilder = new StringBuilder();
-        
+
         URL oracle = new URL(url);
         BufferedReader in = new BufferedReader(
                 new InputStreamReader(oracle.openStream()));
@@ -54,10 +54,9 @@ public class Downloader {
     private Map<String, Long> countWords(List<String> list) {
 
         Map<String, Long> result = new HashMap<>();
-        for (int i = 0; i < list.size(); i++) {
-            String element = list.get(i);
-            long count = list.stream().filter(l->l.equals(element)).count();
-            result.put(element, count);
+        for (String el : list) {
+            long count = list.stream().filter(l -> l.equals(el)).count();
+            result.put(el, count);
         }
         return result;
     }

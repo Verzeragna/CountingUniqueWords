@@ -28,24 +28,24 @@ public class WorkWithDataBase {
             session.getTransaction().commit();
         } catch (Exception e) {
             log.error("Сохранения данных данных: " + e);
-        }finally {
+        } finally {
             session.close();
         }
 
     }
 
-    public void delete(String searchLine)  {
+    public void delete(String searchLine) {
 
-        String temp = "%"+searchLine+"%";
+        String temp = "%" + searchLine + "%";
         try {
             session = factory.getCurrentSession();
             session.beginTransaction();
-            session.createQuery("delete from Statistic where url like :url").setParameter("url",temp).executeUpdate();
+            session.createQuery("delete from Statistic where url like :url").setParameter("url", temp).executeUpdate();
             session.getTransaction().commit();
             ConsoleHelper.showMessage("Удаление завершено!");
         } catch (Exception e) {
             log.error("Ошибка удаления данных: " + e);
-        }finally {
+        } finally {
             session.close();
         }
     }
@@ -59,7 +59,7 @@ public class WorkWithDataBase {
             ConsoleHelper.showMessage("Очистка завершена!");
         } catch (Exception e) {
             log.error("Ошибка очистки базы данных: " + e);
-        }finally {
+        } finally {
             session.close();
         }
     }
@@ -78,7 +78,7 @@ public class WorkWithDataBase {
             session.getTransaction().commit();
         } catch (Exception e) {
             log.error("Ошибка получения данных из базы: " + e);
-        }finally {
+        } finally {
             session.close();
         }
         return dataList;
@@ -86,16 +86,16 @@ public class WorkWithDataBase {
 
     public List<Statistic> getData(String searchLine) {
 
-        String temp = "%"+searchLine+"%";
+        String temp = "%" + searchLine + "%";
         List<Statistic> statisticList = new ArrayList<>();
         try {
             session = factory.getCurrentSession();
             session.beginTransaction();
-            statisticList = session.createQuery("from Statistic where url like :url").setParameter("url",temp).getResultList();
+            statisticList = session.createQuery("from Statistic where url like :url").setParameter("url", temp).getResultList();
             session.getTransaction().commit();
         } catch (Exception e) {
             log.error("Ошибка получения данных из базы: " + e);
-        }finally {
+        } finally {
             session.close();
         }
         return statisticList;

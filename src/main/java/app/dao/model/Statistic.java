@@ -7,7 +7,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "statistics")
-public class Statistic {
+public class Statistic implements Comparable<Statistic>{
 
     @Getter
     @Setter
@@ -43,5 +43,10 @@ public class Statistic {
     @Override
     public String toString() {
         return "URL= " + url + "; " + word + " = " + countWord + ";";
+    }
+
+    @Override
+    public int compareTo(Statistic anotherObj) {
+        return (int) (this.countWord - anotherObj.getCountWord());
     }
 }

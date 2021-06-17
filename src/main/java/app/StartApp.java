@@ -16,7 +16,7 @@ public class StartApp {
 
     private static final Logger log = LogManager.getLogger(StartApp.class);
 
-    public void run(){
+    public void run() {
 
         AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(AppConfig.class);
         CommandProxy commandProxy = ctx.getBean("commandProxy", CommandProxy.class);
@@ -29,7 +29,7 @@ public class StartApp {
             try {
                 line = reader.readLine();
                 commandProxy.doCommand(line);
-            }catch (IOException ex){
+            } catch (IOException ex) {
                 log.error("Ошибка чтения с консоли: " + ex);
             }
         }
